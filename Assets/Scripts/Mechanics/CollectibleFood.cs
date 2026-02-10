@@ -6,12 +6,13 @@ public class CollectibleFood : MonoBehaviour
 {
     public enum FoodType
     {
-        Mushrooms
+        Mushroom,
+        MushroomGrove
     }
 
     [Header("Food Settings")]
-    [SerializeField] private FoodType foodType = FoodType.Mushrooms;
-    [SerializeField] private int foodAmount = 1;
+    [SerializeField] private FoodType foodType;
+    [SerializeField] private int foodAmount;
     
     [Header("Visual Settings")]
     [SerializeField] private GameObject visualObject;
@@ -23,6 +24,7 @@ public class CollectibleFood : MonoBehaviour
     private bool playerInRange = false;
     private bool alreadyCollected = false;
     private CookingManager cookingManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -66,11 +68,32 @@ public class CollectibleFood : MonoBehaviour
         
         if (visualObject != null)
                 visualObject.SetActive(false);
+
+        if (cookingManager.HasEnoughFood())
+        {
+            DisableResourcesByTag("CookingResource");
+        }
         
         // Hide prompt
         if (InteractionPromptManager.Instance != null)
         {
             InteractionPromptManager.Instance.HidePrompt();
+        }
+    }
+
+    private void DisableResourcesByTag(string tag)
+    {
+        GameObject[] resources = GameObject.FindGameObjectsWithTag(tag);
+        
+        foreach (GameObject resource in resources)
+        {
+            Collider2D collider = resource.GetComponent<Collider2D>();
+            
+            if (collider != null)
+            {
+                collider.isTrigger = false;
+                Debug.Log($"Disabled collider for {resource.name} - inventory full!");
+            }
         }
     }
 
@@ -110,8 +133,10 @@ public class CollectibleFood : MonoBehaviour
     {
         switch (foodType)
         {
-            case FoodType.Mushrooms:
+            case FoodType.Mushroom:
                 return "Wild Mushrooms";
+            case FoodType.MushroomGrove:
+                return "A grove of Wild Mushrooms";
             default:
                 return foodType.ToString();
         }

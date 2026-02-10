@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2827dca2edc874ce983b62041484aec0, type: 3}
+  m_Name: CampfireSpritesData
+  m_EditorClassIdentifier: 
+  stage0_Empty: {fileID: -601536405, guid: 4abd75e68468f47c481ee159d34588d1, type: 3}
+  stage1_TinderPlaced: {fileID: 327070335, guid: 90e89a0db34764d0d9673ebddf0c98a9, type: 3}
+  stage2_MaterialsArranged: {fileID: -1105758084, guid: 90e89a0db34764d0d9673ebddf0c98a9, type: 3}
+  stage3_Burning: {fileID: 1616920208, guid: 90e89a0db34764d0d9673ebddf0c98a9, type: 3}
+  stage4_Cooking: {fileID: 1594695201, guid: 90e89a0db34764d0d9673ebddf0c98a9, type: 3}
+  stage5_MealReady: {fileID: -1944280951, guid: 90e89a0db34764d0d9673ebddf0c98a9, type: 3}

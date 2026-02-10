@@ -79,7 +79,15 @@ public class InteractableResource : MonoBehaviour
             visualObject.SetActive(false);
         }
 
-        InteractionPromptManager.Instance?.HidePrompt();
+        // InteractionPromptManager.Instance?.HidePrompt();
+        if (InteractionPromptManager.Instance == null)
+        {
+            InteractionPromptManager.Instance.HidePrompt();
+        }
+        // if (myObject != null)
+        // {
+        //     myObject.DoSomething();
+        // }
         
         // Optionally destroy after a delay (in case we want to respawn later)
         // Destroy(gameObject, 0.5f);

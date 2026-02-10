@@ -5,6 +5,9 @@ using TMPro;
 
 public class FireResourceManager : MonoBehaviour
 {
+    [Header("Interactable Manager Reference")]
+    [SerializeField] private InteractableManager interactableManager;
+
     [Header("UI References")]
     [SerializeField] private GameObject inventoryPanel;
     [SerializeField] private TextMeshProUGUI tinderText;
@@ -52,6 +55,11 @@ public class FireResourceManager : MonoBehaviour
                 logsCount = Mathf.Min(logsCount + amount, logsNeeded);
                 break;
         }
+
+        if (HasAllResources())
+        {
+            DisableResourcesByTag("CampfireResource");
+        }
         
         UpdateInventoryUI();
         
@@ -75,11 +83,11 @@ public class FireResourceManager : MonoBehaviour
     
     public void UseResources()
     {
-        // Clear inventory after building fire
         tinderCount = 0;
         kindlingCount = 0;
         logsCount = 0;
         UpdateInventoryUI();
+        inventoryPanel.SetActive(false);
     }
 
     private void UpdateInventoryUI()
@@ -104,6 +112,22 @@ public class FireResourceManager : MonoBehaviour
         }
     }
 
+    private void DisableResourcesByTag(string tag)
+    {
+        GameObject[] resources = GameObject.FindGameObjectsWithTag(tag);
+        
+        foreach (GameObject resource in resources)
+        {
+            Collider2D collider = resource.GetComponent<Collider2D>();
+            
+            if (collider != null)
+            {
+                collider.isTrigger = false;
+                Debug.Log($"Disabled collider for {resource.name} - inventory full!");
+            }
+        }
+    }
+
     public int GetTinderCount() { return tinderCount; }
     public int GetKindlingCount() { return kindlingCount; }
     public int GetLogsCount() { return logsCount; }
@@ -111,6 +135,6 @@ public class FireResourceManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Collectible
+  - CampfireResource
+  - CookingResource
   layers:
   - Default
   - TransparentFX
@@ -15,7 +17,7 @@ TagManager:
   - Ground
   - Player
   - Collectibles
-  - 
+  - TutorialElement
   - 
   - 
   - 
@@ -45,6 +47,12 @@ TagManager:
   - name: Background
     uniqueID: 244230871
     locked: 0
+  - name: Lower Order UI Elements
+    uniqueID: 338322845
+    locked: 0
   - name: Player
     uniqueID: 1125188961
+    locked: 0
+  - name: UI Elements
+    uniqueID: 2708131957
     locked: 0

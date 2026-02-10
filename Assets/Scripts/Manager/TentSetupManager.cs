@@ -8,6 +8,8 @@ public class TentSetupManager : MonoBehaviour
 {
     [Header("Audio")]
     [SerializeField] private AudioClip stakeSound;
+    [SerializeField] private AudioClip poleSound;
+    [SerializeField] private AudioClip tentSound;
     [SerializeField] private AudioClip completeSound;
     private AudioSource audioSource;
     
@@ -16,10 +18,14 @@ public class TentSetupManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI instructionText;
     [SerializeField] private GameObject closeButton;
     [SerializeField] private Button[] stakeButtons;
+    [SerializeField] private GameObject tutorialPanel;
 
     [Header("Tent GameObject Reference")]
     [SerializeField] private GameObject tentObject;
     [SerializeField] private SpriteRenderer tentSpriteRenderer;
+
+    [Header("Interactable Reference")]
+    [SerializeField] private Interactable tentInteractable;
 
     [Header("Tent Stage Sprites")]
     [SerializeField] private Sprite tentStage1_FlatOnGround;
@@ -67,7 +73,6 @@ public class TentSetupManager : MonoBehaviour
     private int phase2Progress = 0;
     private int phase3Progress = 0;
 
-    // Coroutine reference for cancellation if needed
     private Coroutine phaseTransitionCoroutine;
 
     void Start()
@@ -86,6 +91,7 @@ public class TentSetupManager : MonoBehaviour
     {
         isSetupActive = true;
         tentSetupPanel.SetActive(true);
+        tutorialPanel.SetActive(false);
 
         currentPhase = TentPhase.PlacingStakes;
         stakesPlaced = 0;
@@ -109,10 +115,6 @@ public class TentSetupManager : MonoBehaviour
             colors.normalColor = Color.red;
             btn.colors = colors;
             btn.interactable = true;
-            
-            // TextMeshProUGUI btnText = btn.GetComponentInChildren<TextMeshProUGUI>();
-            // if (btnText != null)
-            //     btnText.text = "";
         }
     }
     
@@ -147,6 +149,8 @@ public class TentSetupManager : MonoBehaviour
             tentSpriteRenderer.sprite = tentStage1_FlatOnGround;
         
         currentPhase = TentPhase.RaisingPoles;
+        stakeButtons[2].gameObject.SetActive(false);
+        stakeButtons[3].gameObject.SetActive(false);
         SetupPhase2();
     }
 
@@ -158,6 +162,12 @@ public class TentSetupManager : MonoBehaviour
             colors.normalColor = Color.blue;
             stakeButtons[i].colors = colors;
             stakeButtons[i].interactable = true;
+
+            RectTransform rectTransform = stakeButtons[i].GetComponent<RectTransform>();
+        if (rectTransform != null)
+        {
+            rectTransform.sizeDelta = new Vector2(200f, rectTransform.sizeDelta.y); // Width = 200, keep height
+        }
             
             TextMeshProUGUI btnText = stakeButtons[i].GetComponentInChildren<TextMeshProUGUI>();
             if (btnText != null)
@@ -183,6 +193,8 @@ public class TentSetupManager : MonoBehaviour
         
         phase2Progress++;
         Debug.Log("Pole raised! Progress: " + phase2Progress + "/2");
+        
+        PlaySound(poleSound);
         
         UpdateInstructions();
         
@@ -210,17 +222,29 @@ public class TentSetupManager : MonoBehaviour
         for (int i = 0; i < 2 && i < stakeButtons.Length; i++)
         {
             ColorBlock colors = stakeButtons[i].colors;
-            colors.normalColor = Color.yellow;
+            colors.normalColor = Color.cyan;
             stakeButtons[i].colors = colors;
             stakeButtons[i].interactable = true;
+
+            RectTransform rectTransform = stakeButtons[i].GetComponent<RectTransform>();
+            if (rectTransform != null)
+            {
+                rectTransform.sizeDelta = new Vector2(200f, rectTransform.sizeDelta.y); // Width = 200, keep height
+            }
             
             TextMeshProUGUI btnText = stakeButtons[i].GetComponentInChildren<TextMeshProUGUI>();
             if (btnText != null)
             {
                 if (i == 0)
+                {
                     btnText.text = "Rainfly";
+                    btnText.color = Color.black;
+                }
                 else
+                {
                     btnText.text = "Guy Lines";
+                    btnText.color = Color.black;
+                }
             }
         }
         
@@ -236,13 +260,11 @@ public class TentSetupManager : MonoBehaviour
         stakeButtons[taskIndex].colors = colors;
         stakeButtons[taskIndex].interactable = false;
         
-        // TextMeshProUGUI btnText = stakeButtons[taskIndex].GetComponentInChildren<TextMeshProUGUI>();
-        // if (btnText != null)
-        //     btnText.text = "✓";
-        
         phase3Progress++;
         Debug.Log("Final task complete! Progress: " + phase3Progress + "/2");
         
+        PlaySound(tentSound);
+
         UpdateInstructions();
         
         if (phase3Progress >= 2)
@@ -263,6 +285,8 @@ public class TentSetupManager : MonoBehaviour
             tentSpriteRenderer.sprite = tentStage3_Complete;
         
         instructionText.text = phase3Instructions[2];
+
+        tentInteractable.SetTentSetup(true);
         
         StartCoroutine(CloseAfterDelay(2f));
     }
@@ -299,9 +323,15 @@ public class TentSetupManager : MonoBehaviour
         isSetupActive = false;
         audioSource.Stop();
         tentSetupPanel.SetActive(false);
+        tutorialPanel.SetActive(true);
         Time.timeScale = 1f;
+
+        // Interactable tentInteractable = FindObjectOfType<Interactable>();
+        if (tentInteractable != null)
+        {
+            tentInteractable.SetTentSetup(true);
+        }
         
-        // Cancel any running phase transition
         if (phaseTransitionCoroutine != null)
         {
             StopCoroutine(phaseTransitionCoroutine);
@@ -309,7 +339,6 @@ public class TentSetupManager : MonoBehaviour
         }
     }
 
-    // Helper method for playing sounds
     private void PlaySound(AudioClip clip)
     {
         if (clip != null)

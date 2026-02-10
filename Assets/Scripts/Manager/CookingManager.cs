@@ -13,6 +13,8 @@ public class CookingManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI instructionText;
     [SerializeField] private Button placeMushroomsButton;
     [SerializeField] private Button cookButton;
+    [SerializeField] private GameObject tutorialPanel;
+    [SerializeField] private SpriteRenderer campfireSpriteRenderer;
     
     [Header("Visual References")]
     [SerializeField] private Image panSlot;
@@ -21,11 +23,17 @@ public class CookingManager : MonoBehaviour
     [SerializeField] private Sprite cookedMealSprite;
     
     [Header("Food Inventory")]
-    [SerializeField] private int mushroomsNeeded = 3;
+    [SerializeField] private int mushroomsNeeded = 5;
     private int mushroomCount = 0;
     
     [Header("Campfire Reference")]
     [SerializeField] private CampfireManager campfireManager;
+
+    [Header("Interactable Reference")]
+    [SerializeField] private Interactable campfireInteractable;
+
+    [Header("Shared Sprite Data")]
+    [SerializeField] private CampfireSprites campfireSprites;
     
     [Header("Cooking State")]
     private bool mushroomsPlaced = false;
@@ -58,18 +66,21 @@ public class CookingManager : MonoBehaviour
     {
         switch (foodType)
         {
-            case CollectibleFood.FoodType.Mushrooms:
+            case CollectibleFood.FoodType.Mushroom or CollectibleFood.FoodType.MushroomGrove:
                 mushroomCount = Mathf.Min(mushroomCount + amount, mushroomsNeeded);
                 break;
+            // case CollectibleFood.FoodType.MushroomGrove:
+            //     mushroomCount = Mathf.Min(mushroomCount + amount, mushroomsNeeded);
+            //     break;
         }
         
         UpdateInventoryUI();
         
-        // Show inventory panel when first food collected
-        if (cookingInventoryPanel != null && !cookingInventoryPanel.activeSelf)
-        {
-            cookingInventoryPanel.SetActive(true);
-        }
+        // Show inventory panel when first food collected // DISCARDED because I chose to show the inv after interacting with campfire
+        // if (cookingInventoryPanel != null && !cookingInventoryPanel.activeSelf)
+        // {
+        //     cookingInventoryPanel.SetActive(true);
+        // }
     }
 
     public bool HasEnoughFood()
@@ -79,20 +90,33 @@ public class CookingManager : MonoBehaviour
 
     public void StartCooking()
     {
-        // Check if campfire is lit
-        // You'll need to add a public method in CampfireManager to check this
-        
-        // Check if player has food
-        if (!HasEnoughFood())
+        // if (campfireManager != null && campfireInteractable != null && !campfireInteractable.GetCampfireIsLit())
+        // {
+        //     Debug.Log("You need to light the campfire first!");
+        //     instructionText.text = "Light the campfire before cooking!";
+        //     return;
+        // }
+
+        if (campfireSpriteRenderer != null && campfireSprites != null)
         {
+            campfireSpriteRenderer.sprite = campfireSprites.stage4_Cooking;
+        }
+
+        if (campfireManager != null && campfireInteractable != null && campfireInteractable.GetCampfireIsLit() && !HasEnoughFood())
+        {
+            cookingInventoryPanel.SetActive(true);
+            cookingPanel.SetActive(true);
+            // tutorialPanel.SetActive(false);
+
             Debug.Log("Collect more mushrooms first!");
             instructionText.text = "You need to collect more mushrooms!\n\n" +
                                   $"Current: {mushroomCount}/{mushroomsNeeded}";
+            // campfireInteractable.ShowCookingPrerequisitesPopup();
             return;
         }
         
-        // Open cooking panel
         cookingPanel.SetActive(true);
+        tutorialPanel.SetActive(false);
         Time.timeScale = 0f;
         
         ResetCooking();
@@ -104,11 +128,9 @@ public class CookingManager : MonoBehaviour
         mushroomsPlaced = false;
         mealCooked = false;
         
-        // Set pan to empty
         if (panSlot != null && emptyPanSprite != null)
             panSlot.sprite = emptyPanSprite;
         
-        // Enable place button
         placeMushroomsButton.interactable = true;
         cookButton.interactable = false;
     }
@@ -123,11 +145,12 @@ public class CookingManager : MonoBehaviour
         
         mushroomsPlaced = true;
         
-        // Change pan sprite to show mushrooms
         if (panSlot != null && mushroomsInPanSprite != null)
+        {
+            Debug.Log("Pan in Sprite");
             panSlot.sprite = mushroomsInPanSprite;
+        }
         
-        // Disable place button, enable cook button
         placeMushroomsButton.interactable = false;
         cookButton.interactable = true;
         
@@ -145,20 +168,22 @@ public class CookingManager : MonoBehaviour
         
         mealCooked = true;
         
-        // Change to cooked meal sprite
         if (panSlot != null && cookedMealSprite != null)
             panSlot.sprite = cookedMealSprite;
         
         cookButton.interactable = false;
         
-        // Use up the mushrooms
         mushroomCount = 0;
         UpdateInventoryUI();
         
         Debug.Log("Meal cooked successfully!");
         instructionText.text = "Meal cooked!\n" + cookingTips[3];
         
-        // Invoke("CloseCookingPanel", 3f);
+        if (campfireSpriteRenderer != null && campfireSprites != null)
+        {
+            campfireSpriteRenderer.sprite = campfireSprites.stage5_MealReady;
+        }
+
         closePanelCoroutine = StartCoroutine(CloseAfterDelay(3f));
     }
 
@@ -187,7 +212,15 @@ public class CookingManager : MonoBehaviour
     
     public void CloseCookingPanel()
     {
+        if (campfireInteractable != null)
+        {
+            campfireInteractable.SetFoodCooked(true);
+            // campfireSpriteRenderer.sprite = cookedMealSprite;
+        }
+
         cookingPanel.SetActive(false);
+        cookingInventoryPanel.SetActive(false);
+        tutorialPanel.SetActive(true);
         Time.timeScale = 1f;
     }
 

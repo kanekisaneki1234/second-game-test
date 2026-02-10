@@ -9,10 +9,18 @@ public class PlayerMovement : MonoBehaviour
     
     private Rigidbody2D rb;
     private Vector2 moveInput;
+    private Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        
+        if (animator == null)
+        {
+            Debug.LogError("Animator component not found on Player!");
+        }
     }
 
     // Update is called once per frame
@@ -23,11 +31,26 @@ public class PlayerMovement : MonoBehaviour
         
         // Normalize diagonal movement
         moveInput = moveInput.normalized;
+
+        UpdateAnimations();
     }
 
     void FixedUpdate()
     {
         // Move the player
         rb.velocity = moveInput * moveSpeed;
+    }
+
+    private void UpdateAnimations()
+    {
+        if (animator == null) return;
+        
+        // Calculate movement speed
+        float speed = moveInput.magnitude;
+        
+        // Set animator parameters
+        animator.SetFloat("Horizontal", moveInput.x);
+        animator.SetFloat("Vertical", moveInput.y);
+        animator.SetFloat("Speed", speed);
     }
 }

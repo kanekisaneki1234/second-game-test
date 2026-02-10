@@ -11,7 +11,10 @@ public class CampfireManager : MonoBehaviour
 
     [Header("UI References")]
     [SerializeField] private GameObject campfirePanel;
+    [SerializeField] private GameObject cookingInventory;
+    [SerializeField] private GameObject tutorialPanel;
     [SerializeField] private TextMeshProUGUI instructionText;
+    [SerializeField] private Image FirePitDiagramImage;
     [SerializeField] private Button placeTinderButton;
     [SerializeField] private Button placeKindlingButton;
     [SerializeField] private Button placeLogsButton;
@@ -23,19 +26,23 @@ public class CampfireManager : MonoBehaviour
     [SerializeField] private Image logSlot;
     
     [Header("Game References")]
+    // [SerializeField] private TutorialManager tutorialManager;
     [SerializeField] private FireResourceManager resourceManager;
     [SerializeField] private GameObject campfireObject;
     [SerializeField] private SpriteRenderer campfireSpriteRenderer;
 
-    [Header("Campfire Stage Sprites")]
-    [SerializeField] private Sprite campfireStage0_Empty;
-    [SerializeField] private Sprite campfireStage1_TinderPlaced;
-    [SerializeField] private Sprite campfireStage2_MaterialsArranged;
-    [SerializeField] private Sprite campfireStage3_Burning;
+    // [Header("Campfire Stage Sprites")]
+    // [SerializeField] private Sprite campfireStage0_Empty;
+    // [SerializeField] private Sprite campfireStage1_TinderPlaced;
+    // [SerializeField] private Sprite campfireStage2_MaterialsArranged;
+    // [SerializeField] private Sprite campfireStage3_Burning;
+    // [SerializeField] private Sprite campfireStage4_CookedFood;
+    [Header("Shared Sprite Data")]
+    [SerializeField] private CampfireSprites campfireSprites;
 
     [Header("Fire Effects")]
     [SerializeField] private ParticleSystem fireParticles;
-    [SerializeField] private GameObject smokeEffect;
+    [SerializeField] private ParticleSystem smokeEffect;
     
     private bool tinderPlaced = false;
     private bool kindlingPlaced = false;
@@ -58,14 +65,14 @@ public class CampfireManager : MonoBehaviour
         if (campfirePanel != null)
             campfirePanel.SetActive(false);
 
-        if (campfireSpriteRenderer != null && campfireStage0_Empty != null)
-            campfireSpriteRenderer.sprite = campfireStage0_Empty;
+        if (campfireSpriteRenderer != null && campfireSprites != null)
+            campfireSpriteRenderer.sprite = campfireSprites.stage0_Empty;
             
         if (fireParticles != null)
             fireParticles.Stop();
             
         if (smokeEffect != null)
-            smokeEffect.SetActive(false);
+            smokeEffect.Stop();
     }
 
     public void StartCampfireBuilding()
@@ -75,27 +82,32 @@ public class CampfireManager : MonoBehaviour
             resourceManager.ShowInventory();
         }
 
-        if (!resourceManager.HasAllResources())
+        // if (!resourceManager.HasAllResources())
+        // {
+        //     Debug.Log("You need to collect more materials first!");
+
+        //     string missingItems = "Still need:\n";
+        //     if (!resourceManager.HasEnoughTinder())
+        //         missingItems += "- More tinder\n";
+        //     if (!resourceManager.HasEnoughKindling())
+        //         missingItems += "- More kindling\n";
+        //     if (!resourceManager.HasEnoughLogs())
+        //         missingItems += "- More logs\n";
+
+        //     campfireInteractable.ShowCampfirePrerequisitesPopup("Collect all materials first!\n\n" + missingItems);
+        //     return;
+        // }
+        
+        if (resourceManager.HasAllResources())
         {
-            Debug.Log("You need to collect more materials first!");
-
-            string missingItems = "Still need:\n";
-            if (!resourceManager.HasEnoughTinder())
-                missingItems += "- More tinder\n";
-            if (!resourceManager.HasEnoughKindling())
-                missingItems += "- More kindling\n";
-            if (!resourceManager.HasEnoughLogs())
-                missingItems += "- More logs\n";
-
-            instructionText.text = "Collect all materials first!\n\n" + missingItems;
-            return;
+            campfirePanel.SetActive(true);
+            tutorialPanel.SetActive(false);            
+            Time.timeScale = 0f;
+            ResetFireBuilding();
+            UpdateInstructions();
         }
-        
-        campfirePanel.SetActive(true);
-        Time.timeScale = 0f;
-        
-        ResetFireBuilding();
-        UpdateInstructions();
+        else
+            return;
     }
 
     private void ResetFireBuilding()
@@ -104,8 +116,8 @@ public class CampfireManager : MonoBehaviour
         kindlingPlaced = false;
         logsPlaced = false;
 
-        if (campfireSpriteRenderer != null && campfireStage0_Empty != null)
-            campfireSpriteRenderer.sprite = campfireStage0_Empty;
+        if (campfireSpriteRenderer != null && campfireSprites != null)
+            campfireSpriteRenderer.sprite = campfireSprites.stage0_Empty;
         
         tinderSlot.color = new Color(1f, 1f, 0.7f, 0.5f);
         kindlingSlot.color = new Color(0.8f, 0.6f, 0.4f, 0.5f);
@@ -124,11 +136,17 @@ public class CampfireManager : MonoBehaviour
         placeTinderButton.interactable = false;
         placeKindlingButton.interactable = true;
         
+        ColorBlock colors = placeTinderButton.colors;
+        colors.disabledColor = Color.green;
+        placeTinderButton.colors = colors;
+        
         Debug.Log("Tinder placed!");
 
-        if (campfireSpriteRenderer != null && campfireStage1_TinderPlaced != null)
+        if (campfireSpriteRenderer != null && campfireSprites != null)
         {
-            campfireSpriteRenderer.sprite = campfireStage1_TinderPlaced;
+            campfireSpriteRenderer.sprite = campfireSprites.stage1_TinderPlaced;
+            FirePitDiagramImage.sprite = campfireSprites.stage1_TinderPlaced;
+            FirePitDiagramImage.color = new Color(255f, 255f, 255f, 255f);
         }
 
         UpdateInstructions();
@@ -146,6 +164,10 @@ public class CampfireManager : MonoBehaviour
         kindlingSlot.color = new Color(0.8f, 0.5f, 0.2f);
         placeKindlingButton.interactable = false;
         placeLogsButton.interactable = true;
+
+        ColorBlock colors = placeKindlingButton.colors;
+        colors.disabledColor = Color.green;
+        placeKindlingButton.colors = colors;
         
         Debug.Log("Kindling placed!");
         UpdateInstructions();
@@ -163,10 +185,16 @@ public class CampfireManager : MonoBehaviour
         logSlot.color = new Color(0.5f, 0.3f, 0.1f);
         placeLogsButton.interactable = false;
         lightFireButton.interactable = true;
+
+        ColorBlock colors = placeLogsButton.colors;
+        colors.disabledColor = Color.green;
+        placeLogsButton.colors = colors;
         
-        if (campfireSpriteRenderer != null && campfireStage2_MaterialsArranged != null)
+        if (campfireSpriteRenderer != null && campfireSprites != null)
         {
-            campfireSpriteRenderer.sprite = campfireStage2_MaterialsArranged;
+            Debug.Log("Materials setup");
+            campfireSpriteRenderer.sprite = campfireSprites.stage2_MaterialsArranged;
+            FirePitDiagramImage.sprite = campfireSprites.stage2_MaterialsArranged;
         }
 
         Debug.Log("Logs placed!");
@@ -184,29 +212,30 @@ public class CampfireManager : MonoBehaviour
         Debug.Log("Fire lit successfully!");
         instructionText.text = "Fire lit successfully!\n" + tips[3];
 
-        if (campfireSpriteRenderer != null && campfireStage3_Burning != null)
+        if (campfireSpriteRenderer != null && campfireSprites != null)
         {
-            campfireSpriteRenderer.sprite = campfireStage3_Burning;
+            Debug.Log("Burning Sprite");
+            campfireSpriteRenderer.sprite = campfireSprites.stage3_Burning;
+            campfireSpriteRenderer.sprite = campfireSprites.stage3_Burning;
         }
 
         if (fireParticles != null)
         {
-            ParticleSystem fireParticles = campfireObject.GetComponentInChildren<ParticleSystem>();
-            if (fireParticles != null)
                 fireParticles.Play();
         }
         
-        if (smokeEffect != null)
+        ParticleSystem smokePS = smokeEffect.GetComponent<ParticleSystem>();
+        if (smokePS != null)
         {
-            smokeEffect.SetActive(true);
+            smokePS.Play();
+            Debug.Log("Smoke effect started!");
         }
         
         resourceManager.UseResources();
 
-        if (campfireInteractable != null)
-        {
-            campfireInteractable.SetCampfireLit(true);
-        }
+        // Interactable campfireInteractable = GetComponent<Interactable>();
+
+        cookingInventory.SetActive(true);
         
         closePanelCoroutine = StartCoroutine(CloseAfterDelay(3f));
     }
@@ -232,9 +261,15 @@ public class CampfireManager : MonoBehaviour
     public void CloseCampfirePanel()
     {
         campfirePanel.SetActive(false);
+        tutorialPanel.SetActive(true);
+
+        if (campfireInteractable != null)
+        {
+            campfireInteractable.SetCampfireLit(true);
+        }
+
         Time.timeScale = 1f;
         
-        // Cancel any running close coroutine
         if (closePanelCoroutine != null)
         {
             StopCoroutine(closePanelCoroutine);
