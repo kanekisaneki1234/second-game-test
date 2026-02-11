@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -69,18 +68,9 @@ public class CookingManager : MonoBehaviour
             case CollectibleFood.FoodType.Mushroom or CollectibleFood.FoodType.MushroomGrove:
                 mushroomCount = Mathf.Min(mushroomCount + amount, mushroomsNeeded);
                 break;
-            // case CollectibleFood.FoodType.MushroomGrove:
-            //     mushroomCount = Mathf.Min(mushroomCount + amount, mushroomsNeeded);
-            //     break;
         }
         
         UpdateInventoryUI();
-        
-        // Show inventory panel when first food collected // DISCARDED because I chose to show the inv after interacting with campfire
-        // if (cookingInventoryPanel != null && !cookingInventoryPanel.activeSelf)
-        // {
-        //     cookingInventoryPanel.SetActive(true);
-        // }
     }
 
     public bool HasEnoughFood()
@@ -90,13 +80,6 @@ public class CookingManager : MonoBehaviour
 
     public void StartCooking()
     {
-        // if (campfireManager != null && campfireInteractable != null && !campfireInteractable.GetCampfireIsLit())
-        // {
-        //     Debug.Log("You need to light the campfire first!");
-        //     instructionText.text = "Light the campfire before cooking!";
-        //     return;
-        // }
-
         if (campfireSpriteRenderer != null && campfireSprites != null)
         {
             campfireSpriteRenderer.sprite = campfireSprites.stage4_Cooking;
@@ -106,12 +89,10 @@ public class CookingManager : MonoBehaviour
         {
             cookingInventoryPanel.SetActive(true);
             cookingPanel.SetActive(true);
-            // tutorialPanel.SetActive(false);
 
             Debug.Log("Collect more mushrooms first!");
             instructionText.text = "You need to collect more mushrooms!\n\n" +
                                   $"Current: {mushroomCount}/{mushroomsNeeded}";
-            // campfireInteractable.ShowCookingPrerequisitesPopup();
             return;
         }
         
@@ -215,7 +196,6 @@ public class CookingManager : MonoBehaviour
         if (campfireInteractable != null)
         {
             campfireInteractable.SetFoodCooked(true);
-            // campfireSpriteRenderer.sprite = cookedMealSprite;
         }
 
         cookingPanel.SetActive(false);

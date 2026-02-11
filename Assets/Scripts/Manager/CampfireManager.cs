@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -26,17 +25,10 @@ public class CampfireManager : MonoBehaviour
     [SerializeField] private Image logSlot;
     
     [Header("Game References")]
-    // [SerializeField] private TutorialManager tutorialManager;
     [SerializeField] private FireResourceManager resourceManager;
     [SerializeField] private GameObject campfireObject;
     [SerializeField] private SpriteRenderer campfireSpriteRenderer;
 
-    // [Header("Campfire Stage Sprites")]
-    // [SerializeField] private Sprite campfireStage0_Empty;
-    // [SerializeField] private Sprite campfireStage1_TinderPlaced;
-    // [SerializeField] private Sprite campfireStage2_MaterialsArranged;
-    // [SerializeField] private Sprite campfireStage3_Burning;
-    // [SerializeField] private Sprite campfireStage4_CookedFood;
     [Header("Shared Sprite Data")]
     [SerializeField] private CampfireSprites campfireSprites;
 
@@ -57,7 +49,6 @@ public class CampfireManager : MonoBehaviour
         "Remember: Always clear a 10-foot area around your fire and have water nearby!"
     };
 
-    // Coroutine reference for cancellation if needed
     private Coroutine closePanelCoroutine;
 
     void Start()
@@ -81,22 +72,6 @@ public class CampfireManager : MonoBehaviour
         {
             resourceManager.ShowInventory();
         }
-
-        // if (!resourceManager.HasAllResources())
-        // {
-        //     Debug.Log("You need to collect more materials first!");
-
-        //     string missingItems = "Still need:\n";
-        //     if (!resourceManager.HasEnoughTinder())
-        //         missingItems += "- More tinder\n";
-        //     if (!resourceManager.HasEnoughKindling())
-        //         missingItems += "- More kindling\n";
-        //     if (!resourceManager.HasEnoughLogs())
-        //         missingItems += "- More logs\n";
-
-        //     campfireInteractable.ShowCampfirePrerequisitesPopup("Collect all materials first!\n\n" + missingItems);
-        //     return;
-        // }
         
         if (resourceManager.HasAllResources())
         {
@@ -232,8 +207,6 @@ public class CampfireManager : MonoBehaviour
         }
         
         resourceManager.UseResources();
-
-        // Interactable campfireInteractable = GetComponent<Interactable>();
 
         cookingInventory.SetActive(true);
         

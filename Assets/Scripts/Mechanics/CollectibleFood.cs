@@ -18,8 +18,8 @@ public class CollectibleFood : MonoBehaviour
     [SerializeField] private GameObject visualObject;
     [SerializeField] private string interactionPrompt = "Press E to collect";
     
-    [Header("Audio (Optional)")]
-    [SerializeField] private AudioClip collectSound;
+    // [Header("Audio (Optional)")]
+    // [SerializeField] private AudioClip collectSound;
     
     private bool playerInRange = false;
     private bool alreadyCollected = false;
@@ -53,16 +53,15 @@ public class CollectibleFood : MonoBehaviour
     private void CollectFood()
     {
         if (cookingManager == null || alreadyCollected) return;
-        
-        // Add food to inventory
+
         cookingManager.AddFood(foodType, foodAmount);
         
         alreadyCollected = true;
         
-        if (collectSound != null)
-        {
-            AudioSource.PlayClipAtPoint(collectSound, transform.position);
-        }
+        // if (collectSound != null)
+        // {
+        //     AudioSource.PlayClipAtPoint(collectSound, transform.position);
+        // }
         
         Debug.Log($"Collected {foodAmount}x {foodType.ToString()}");
         
@@ -73,8 +72,7 @@ public class CollectibleFood : MonoBehaviour
         {
             DisableResourcesByTag("CookingResource");
         }
-        
-        // Hide prompt
+
         if (InteractionPromptManager.Instance != null)
         {
             InteractionPromptManager.Instance.HidePrompt();

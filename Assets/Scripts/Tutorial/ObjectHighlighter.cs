@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ObjectHighlighter : MonoBehaviour
@@ -37,10 +36,8 @@ public class ObjectHighlighter : MonoBehaviour
         isGlowing = true;
         StartCoroutine(GlowPulse());
         
-        // Optionally show arrow pointing at object
         if (arrowPrefab != null)
         {
-            // arrowInstance = Instantiate(arrowPrefab, transform.position + Vector3.up * 2f, Quaternion.identity);
             arrowInstance = Instantiate(arrowPrefab, transform.position + Vector3.up * 2f, arrowPrefab.transform.rotation);
             arrowInstance.transform.SetParent(transform);
         }
@@ -53,14 +50,12 @@ public class ObjectHighlighter : MonoBehaviour
         isGlowing = false;
         StopAllCoroutines();
         
-        // Restore original appearance
         if (spriteRenderer != null)
         {
             spriteRenderer.color = originalColor;
             spriteRenderer.material = originalMaterial;
         }
         
-        // Remove arrow
         if (arrowInstance != null)
         {
             Destroy(arrowInstance);
@@ -71,8 +66,7 @@ public class ObjectHighlighter : MonoBehaviour
     {
         while (isGlowing)
         {
-            // Pulse between original color and glow color
-            float pulse = (Mathf.Sin(Time.time * pulseSpeed) + 1f) / 2f; // 0 to 1
+            float pulse = (Mathf.Sin(Time.time * pulseSpeed) + 1f) / 2f;
             
             if (spriteRenderer != null)
             {
@@ -89,8 +83,6 @@ public class ObjectHighlighter : MonoBehaviour
         if (isGlowing) return;
         isGlowing = true;
         
-        // This requires an outline shader material
-        // For now, we'll use the pulse method above
         StartCoroutine(GlowPulse());
     }
 

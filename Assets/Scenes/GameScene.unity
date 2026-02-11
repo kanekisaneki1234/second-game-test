@@ -1394,7 +1394,6 @@ MonoBehaviour:
   foodAmount: 1
   visualObject: {fileID: 0}
   interactionPrompt: Press E to collect
-  collectSound: {fileID: 0}
 --- !u!61 &131368879
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1504,9 +1503,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bed0bf2d15fbc46e6a8aa962f182f408, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  glowColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  glowIntensity: 1.5
-  pulseSpeed: 2
+  glowColor: {r: 0.38679248, g: 0.009122463, b: 0.009122463, a: 1}
+  glowIntensity: 1
+  pulseSpeed: 5
   arrowPrefab: {fileID: 2100108437290234979, guid: ad51b0cc74cc14b878b296ee40e5b937, type: 3}
 --- !u!1 &143932011
 GameObject:
@@ -2310,8 +2309,6 @@ MonoBehaviour:
   tutorialManager: {fileID: 1523544619}
   isTent: 1
   isCampfire: 0
-  prerequisiteText: {fileID: 0}
-  tutorialPanel: {fileID: 473352004}
 --- !u!61 &214233776
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4566,7 +4563,6 @@ MonoBehaviour:
   foodAmount: 3
   visualObject: {fileID: 0}
   interactionPrompt: Press E to collect
-  collectSound: {fileID: 0}
 --- !u!61 &463279777
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4676,9 +4672,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bed0bf2d15fbc46e6a8aa962f182f408, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  glowColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  glowIntensity: 1.5
-  pulseSpeed: 2
+  glowColor: {r: 0.38679248, g: 0.009122463, b: 0.009122463, a: 1}
+  glowIntensity: 1
+  pulseSpeed: 5
   arrowPrefab: {fileID: 2100108437290234979, guid: ad51b0cc74cc14b878b296ee40e5b937, type: 3}
 --- !u!1 &463723948
 GameObject:
@@ -5536,7 +5532,6 @@ MonoBehaviour:
   foodAmount: 3
   visualObject: {fileID: 0}
   interactionPrompt: Press E to collect
-  collectSound: {fileID: 0}
 --- !u!61 &537868365
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5646,9 +5641,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bed0bf2d15fbc46e6a8aa962f182f408, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  glowColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  glowIntensity: 1.5
-  pulseSpeed: 2
+  glowColor: {r: 0.38679248, g: 0.009122463, b: 0.009122463, a: 1}
+  glowIntensity: 1
+  pulseSpeed: 5
   arrowPrefab: {fileID: 2100108437290234979, guid: ad51b0cc74cc14b878b296ee40e5b937, type: 3}
 --- !u!1 &579956627
 GameObject:
@@ -5701,7 +5696,6 @@ MonoBehaviour:
   foodAmount: 1
   visualObject: {fileID: 0}
   interactionPrompt: Press E to collect
-  collectSound: {fileID: 0}
 --- !u!61 &579956630
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5811,9 +5805,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bed0bf2d15fbc46e6a8aa962f182f408, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  glowColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  glowIntensity: 1.5
-  pulseSpeed: 2
+  glowColor: {r: 0.38679248, g: 0.009122463, b: 0.009122463, a: 1}
+  glowIntensity: 1
+  pulseSpeed: 5
   arrowPrefab: {fileID: 2100108437290234979, guid: ad51b0cc74cc14b878b296ee40e5b937, type: 3}
 --- !u!1 &595125683
 GameObject:
@@ -11950,7 +11944,6 @@ MonoBehaviour:
   foodAmount: 1
   visualObject: {fileID: 0}
   interactionPrompt: Press E to collect
-  collectSound: {fileID: 0}
 --- !u!61 &735375345
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12060,9 +12053,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bed0bf2d15fbc46e6a8aa962f182f408, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  glowColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  glowIntensity: 1.5
-  pulseSpeed: 2
+  glowColor: {r: 0.38679248, g: 0.009122463, b: 0.009122463, a: 1}
+  glowIntensity: 1
+  pulseSpeed: 5
   arrowPrefab: {fileID: 2100108437290234979, guid: ad51b0cc74cc14b878b296ee40e5b937, type: 3}
 --- !u!1 &740825146
 GameObject:
@@ -12115,7 +12108,6 @@ MonoBehaviour:
   foodAmount: 3
   visualObject: {fileID: 0}
   interactionPrompt: Press E to collect
-  collectSound: {fileID: 0}
 --- !u!61 &740825149
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12225,9 +12217,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bed0bf2d15fbc46e6a8aa962f182f408, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  glowColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  glowIntensity: 1.5
-  pulseSpeed: 2
+  glowColor: {r: 0.38679248, g: 0.009122463, b: 0.009122463, a: 1}
+  glowIntensity: 1
+  pulseSpeed: 5
   arrowPrefab: {fileID: 2100108437290234979, guid: ad51b0cc74cc14b878b296ee40e5b937, type: 3}
 --- !u!1 &757063653
 GameObject:
@@ -13536,7 +13528,6 @@ MonoBehaviour:
   foodAmount: 3
   visualObject: {fileID: 0}
   interactionPrompt: Press E to collect
-  collectSound: {fileID: 0}
 --- !u!61 &832280613
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -13646,9 +13637,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bed0bf2d15fbc46e6a8aa962f182f408, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  glowColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  glowIntensity: 1.5
-  pulseSpeed: 2
+  glowColor: {r: 0.38679248, g: 0.009122463, b: 0.009122463, a: 1}
+  glowIntensity: 1
+  pulseSpeed: 5
   arrowPrefab: {fileID: 2100108437290234979, guid: ad51b0cc74cc14b878b296ee40e5b937, type: 3}
 --- !u!1 &843389022
 GameObject:
@@ -13701,7 +13692,6 @@ MonoBehaviour:
   foodAmount: 1
   visualObject: {fileID: 0}
   interactionPrompt: Press E to collect
-  collectSound: {fileID: 0}
 --- !u!61 &843389025
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -13811,9 +13801,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bed0bf2d15fbc46e6a8aa962f182f408, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  glowColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  glowIntensity: 1.5
-  pulseSpeed: 2
+  glowColor: {r: 0.38679248, g: 0.009122463, b: 0.009122463, a: 1}
+  glowIntensity: 1
+  pulseSpeed: 5
   arrowPrefab: {fileID: 2100108437290234979, guid: ad51b0cc74cc14b878b296ee40e5b937, type: 3}
 --- !u!1 &847517161
 GameObject:
@@ -14135,7 +14125,6 @@ MonoBehaviour:
   foodAmount: 1
   visualObject: {fileID: 0}
   interactionPrompt: Press E to collect
-  collectSound: {fileID: 0}
 --- !u!61 &883246921
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -14245,9 +14234,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bed0bf2d15fbc46e6a8aa962f182f408, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  glowColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  glowIntensity: 1.5
-  pulseSpeed: 2
+  glowColor: {r: 0.38679248, g: 0.009122463, b: 0.009122463, a: 1}
+  glowIntensity: 1
+  pulseSpeed: 5
   arrowPrefab: {fileID: 2100108437290234979, guid: ad51b0cc74cc14b878b296ee40e5b937, type: 3}
 --- !u!1 &885576213
 GameObject:
@@ -14714,7 +14703,6 @@ MonoBehaviour:
   foodAmount: 1
   visualObject: {fileID: 0}
   interactionPrompt: Press E to collect
-  collectSound: {fileID: 0}
 --- !u!61 &940316455
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -14824,9 +14812,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bed0bf2d15fbc46e6a8aa962f182f408, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  glowColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  glowIntensity: 1.5
-  pulseSpeed: 2
+  glowColor: {r: 0.38679248, g: 0.009122463, b: 0.009122463, a: 1}
+  glowIntensity: 1
+  pulseSpeed: 5
   arrowPrefab: {fileID: 2100108437290234979, guid: ad51b0cc74cc14b878b296ee40e5b937, type: 3}
 --- !u!1 &943161803
 GameObject:
@@ -15476,7 +15464,6 @@ MonoBehaviour:
   foodAmount: 1
   visualObject: {fileID: 0}
   interactionPrompt: Press E to collect
-  collectSound: {fileID: 0}
 --- !u!61 &1038721079
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -15586,9 +15573,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bed0bf2d15fbc46e6a8aa962f182f408, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  glowColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  glowIntensity: 1.5
-  pulseSpeed: 2
+  glowColor: {r: 0.38679248, g: 0.009122463, b: 0.009122463, a: 1}
+  glowIntensity: 1
+  pulseSpeed: 5
   arrowPrefab: {fileID: 2100108437290234979, guid: ad51b0cc74cc14b878b296ee40e5b937, type: 3}
 --- !u!1 &1047456495
 GameObject:
@@ -21459,7 +21446,6 @@ MonoBehaviour:
   foodAmount: 3
   visualObject: {fileID: 0}
   interactionPrompt: Press E to collect
-  collectSound: {fileID: 0}
 --- !u!61 &1100992280
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -21569,9 +21555,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bed0bf2d15fbc46e6a8aa962f182f408, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  glowColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  glowIntensity: 1.5
-  pulseSpeed: 2
+  glowColor: {r: 0.38679248, g: 0.009122463, b: 0.009122463, a: 1}
+  glowIntensity: 1
+  pulseSpeed: 5
   arrowPrefab: {fileID: 2100108437290234979, guid: ad51b0cc74cc14b878b296ee40e5b937, type: 3}
 --- !u!1 &1109615285
 GameObject:
@@ -22545,7 +22531,6 @@ MonoBehaviour:
   foodAmount: 1
   visualObject: {fileID: 0}
   interactionPrompt: Press E to collect
-  collectSound: {fileID: 0}
 --- !u!61 &1149233393
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -22655,9 +22640,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bed0bf2d15fbc46e6a8aa962f182f408, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  glowColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  glowIntensity: 1.5
-  pulseSpeed: 2
+  glowColor: {r: 0.38679248, g: 0.009122463, b: 0.009122463, a: 1}
+  glowIntensity: 1
+  pulseSpeed: 5
   arrowPrefab: {fileID: 2100108437290234979, guid: ad51b0cc74cc14b878b296ee40e5b937, type: 3}
 --- !u!1 &1154475942
 GameObject:
@@ -23202,7 +23187,6 @@ MonoBehaviour:
   foodAmount: 1
   visualObject: {fileID: 0}
   interactionPrompt: Press E to collect
-  collectSound: {fileID: 0}
 --- !u!61 &1171127342
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -23312,9 +23296,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bed0bf2d15fbc46e6a8aa962f182f408, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  glowColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  glowIntensity: 1.5
-  pulseSpeed: 2
+  glowColor: {r: 0.38679248, g: 0.009122463, b: 0.009122463, a: 1}
+  glowIntensity: 1
+  pulseSpeed: 5
   arrowPrefab: {fileID: 2100108437290234979, guid: ad51b0cc74cc14b878b296ee40e5b937, type: 3}
 --- !u!1 &1178655063
 GameObject:
@@ -23998,7 +23982,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02d6f8c12aacb4edfad3048839408f61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactableManager: {fileID: 0}
   inventoryPanel: {fileID: 1192973796}
   tinderText: {fileID: 1965890560}
   kindlingText: {fileID: 1790185122}
@@ -26807,7 +26790,6 @@ MonoBehaviour:
   foodAmount: 1
   visualObject: {fileID: 0}
   interactionPrompt: Press E to collect
-  collectSound: {fileID: 0}
 --- !u!61 &1462349716
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -26917,9 +26899,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bed0bf2d15fbc46e6a8aa962f182f408, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  glowColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  glowIntensity: 1.5
-  pulseSpeed: 2
+  glowColor: {r: 0.38679248, g: 0.009122463, b: 0.009122463, a: 1}
+  glowIntensity: 1
+  pulseSpeed: 5
   arrowPrefab: {fileID: 2100108437290234979, guid: ad51b0cc74cc14b878b296ee40e5b937, type: 3}
 --- !u!1 &1472365758
 GameObject:
@@ -27919,7 +27901,6 @@ MonoBehaviour:
   foodAmount: 1
   visualObject: {fileID: 0}
   interactionPrompt: Press E to collect
-  collectSound: {fileID: 0}
 --- !u!61 &1535717363
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -28029,9 +28010,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bed0bf2d15fbc46e6a8aa962f182f408, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  glowColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  glowIntensity: 1.5
-  pulseSpeed: 2
+  glowColor: {r: 0.38679248, g: 0.009122463, b: 0.009122463, a: 1}
+  glowIntensity: 1
+  pulseSpeed: 5
   arrowPrefab: {fileID: 2100108437290234979, guid: ad51b0cc74cc14b878b296ee40e5b937, type: 3}
 --- !u!1 &1540103331
 GameObject:
@@ -28084,7 +28065,6 @@ MonoBehaviour:
   foodAmount: 1
   visualObject: {fileID: 0}
   interactionPrompt: Press E to collect
-  collectSound: {fileID: 0}
 --- !u!61 &1540103334
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -28194,9 +28174,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bed0bf2d15fbc46e6a8aa962f182f408, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  glowColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  glowIntensity: 1.5
-  pulseSpeed: 2
+  glowColor: {r: 0.38679248, g: 0.009122463, b: 0.009122463, a: 1}
+  glowIntensity: 1
+  pulseSpeed: 5
   arrowPrefab: {fileID: 2100108437290234979, guid: ad51b0cc74cc14b878b296ee40e5b937, type: 3}
 --- !u!1 &1540341599
 GameObject:
@@ -30250,7 +30230,6 @@ MonoBehaviour:
   foodAmount: 1
   visualObject: {fileID: 0}
   interactionPrompt: Press E to collect
-  collectSound: {fileID: 0}
 --- !u!61 &1800518455
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -30360,9 +30339,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bed0bf2d15fbc46e6a8aa962f182f408, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  glowColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  glowIntensity: 1.5
-  pulseSpeed: 2
+  glowColor: {r: 0.38679248, g: 0.009122463, b: 0.009122463, a: 1}
+  glowIntensity: 1
+  pulseSpeed: 5
   arrowPrefab: {fileID: 2100108437290234979, guid: ad51b0cc74cc14b878b296ee40e5b937, type: 3}
 --- !u!1 &1815274044
 GameObject:
@@ -30480,8 +30459,6 @@ MonoBehaviour:
   tutorialManager: {fileID: 0}
   isTent: 0
   isCampfire: 1
-  prerequisiteText: {fileID: 0}
-  tutorialPanel: {fileID: 473352004}
 --- !u!212 &1873581845
 SpriteRenderer:
   m_ObjectHideFlags: 0

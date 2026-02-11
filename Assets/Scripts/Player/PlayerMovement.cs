@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -29,7 +27,6 @@ public class PlayerMovement : MonoBehaviour
         moveInput.x = Input.GetAxisRaw("Horizontal");
         moveInput.y = Input.GetAxisRaw("Vertical");
         
-        // Normalize diagonal movement
         moveInput = moveInput.normalized;
 
         UpdateAnimations();
@@ -37,7 +34,6 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Move the player
         rb.velocity = moveInput * moveSpeed;
     }
 
@@ -45,10 +41,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (animator == null) return;
         
-        // Calculate movement speed
         float speed = moveInput.magnitude;
         
-        // Set animator parameters
         animator.SetFloat("Horizontal", moveInput.x);
         animator.SetFloat("Vertical", moveInput.y);
         animator.SetFloat("Speed", speed);

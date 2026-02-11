@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
@@ -12,7 +10,6 @@ public class InteractionPromptManager : MonoBehaviour
     
     void Awake()
     {
-        // Singleton pattern
         if (Instance == null)
         {
             Instance = this;
@@ -22,6 +19,7 @@ public class InteractionPromptManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    
     // Start is called before the first frame update
     void Start()
     {

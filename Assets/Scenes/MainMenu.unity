@@ -1337,7 +1337,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transitionCanvas: {fileID: 1529944942}
   fadeImage: {fileID: 1656310193}
-  fadeDuration: 3
+  fadeDuration: 2
   fadeColor: {r: 0, g: 0, b: 0, a: 1}
   fadeInOnSceneLoad: 1
 --- !u!4 &1271008411

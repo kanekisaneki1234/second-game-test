@@ -30,11 +30,6 @@ public class TutorialManager : MonoBehaviour
     
     [Header("Player")]
     [SerializeField] private GameObject player;
-    // [SerializeField] private PlayerController playerController;
-    
-    // [Header("Tutorial Settings")]
-    // [SerializeField] private bool autoMovePlayer = false; // Toggle auto-movement
-    // [SerializeField] private float moveSpeed = 3f;
     
     private int currentStep = 1;
     private bool tutorialActive = false;
@@ -83,6 +78,7 @@ public class TutorialManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -121,8 +117,6 @@ public class TutorialManager : MonoBehaviour
         }
         
         TutorialStep step = tutorialSteps[currentStep];
-        
-        // UpdateStepCounter();
         
         ClearAllHighlights();
         
@@ -168,14 +162,13 @@ public class TutorialManager : MonoBehaviour
     {
         tutorialTitle.text = "Welcome to Camping Simulator!";
         tutorialText.text = "Learn the essentials of camping:\n\n" +
-                           "o Set up your tent properly\n" +
-                           "o Build and light a campfire safely\n" +
-                           "o Forage and cook food\n" +
-                           "o Practice Leave No Trace principles\n\n" +
+                           "• Set up your tent properly\n" +
+                           "• Build and light a campfire safely\n" +
+                           "• Forage and cook food\n" +
+                           "• Practice Leave No Trace principles\n\n" +
                            "Use WASD to move and E to interact.\n\n" +
                            "Ready to start? Let's set up camp!";
         
-        // Invoke("NextStep", 10f);
         StartCoroutine(AutoAdvanceAfterDelay(5f));
     }
 
@@ -187,12 +180,6 @@ public class TutorialManager : MonoBehaviour
                            "Tip: Always set up your tent on flat ground, away from water and hazards.";
         
         HighlightObject(tentObject);
-        
-        // Optionally auto-move player
-        // if (autoMovePlayer && tentObject != null)
-        // {
-        //     StartCoroutine(MovePlayerTo(tentObject.transform.position));
-        // }
     }
 
     private void ShowSetupTent()
@@ -200,9 +187,9 @@ public class TutorialManager : MonoBehaviour
         tutorialTitle.text = "Step 2: Set Up Your Tent";
         tutorialText.text = "Press E near the tent to start setup.\n\n" +
                            "You'll learn how to:\n" +
-                           "o Place stakes properly\n" +
-                           "o Raise tent poles\n" +
-                           "o Secure the rainfly\n\n" +
+                           "• Place stakes properly\n" +
+                           "• Raise tent poles\n" +
+                           "• Secure the rainfly\n\n" +
                            "Follow the on-screen instructions!";
         
         HighlightObject(tentObject);
@@ -227,28 +214,25 @@ public class TutorialManager : MonoBehaviour
         {
             case "tinder":
                 resources = tinderObjects;
-                // displayName = "Tinder (Dry Grass/Leaves)";
                 tutorialTitle.text = "Step 4: Collect Tinder";
                 tutorialText.text = "Collect 3 pieces of tinder for your fire.\n\n" +
                                    "Tinder catches fire easily - look for:\n" +
-                                   "o Dry grass\n" +
-                                   "o Dead leaves\n" +
-                                   "o Small bark pieces\n\n" +
+                                   "• Dry grass\n" +
+                                   "• Dead leaves\n" +
+                                   "• Small bark pieces\n\n" +
                                    "Walk to highlighted items and press E to collect.";
                 break;
             case "kindling":
                 resources = kindlingObjects;
-                // displayName = "Kindling (Small Sticks)";
                 tutorialTitle.text = "Step 5: Collect Kindling";
                 tutorialText.text = "Collect 3 pieces of kindling.\n\n" +
                                    "Kindling burns longer than tinder:\n" +
-                                   "o Small dry sticks\n" +
-                                   "o Twigs (pencil-thick)\n\n" +
+                                   "• Small dry sticks\n" +
+                                   "• Twigs (pencil-thick)\n\n" +
                                    "These help transition from tinder to logs.";
                 break;
             case "logs":
                 resources = logObjects;
-                // displayName = "Logs (Firewood)";
                 tutorialTitle.text = "Step 6: Collect Logs";
                 tutorialText.text = "Collect 3 logs for your fire.\n\n" +
                                    "Logs are your main fuel:\n" +
@@ -278,11 +262,6 @@ public class TutorialManager : MonoBehaviour
                            "Tip: Build fires in clear areas, away from vegetation and at a safe distance from the tent.";
         
         HighlightObject(campfireObject);
-        
-        // if (autoMovePlayer && campfireObject != null)
-        // {
-        //     StartCoroutine(MovePlayerTo(campfireObject.transform.position));
-        // }
     }
 
     private void ShowBuildFire()
@@ -303,10 +282,10 @@ public class TutorialManager : MonoBehaviour
         tutorialTitle.text = "Step 9: Forage for Food";
         tutorialText.text = "Collect 3 mushrooms for cooking.\n\n" +
                            "Important Safety:\n" +
-                           "o Only forage mushrooms you can POSITIVELY identify\n" +
-                           "o When in doubt, leave it out!\n" +
-                           "o Some mushrooms are poisonous\n\n" +
-                           "o Find the highlighted mushrooms.";
+                           "• Only forage mushrooms you can POSITIVELY identify\n" +
+                           "• When in doubt, leave it out!\n" +
+                           "• Some mushrooms are poisonous\n\n" +
+                           "• Find the highlighted mushrooms.";
         
         foreach (GameObject mushroom in mushroomObjects)
         {
@@ -322,9 +301,9 @@ public class TutorialManager : MonoBehaviour
         tutorialTitle.text = "Step 10: Cook Your Meal";
         tutorialText.text = "Return to the lit campfire and press E to cook.\n\n" +
                            "You'll learn about:\n" +
-                           "o Cooking food thoroughly\n" +
-                           "o Food safety in the backcountry\n" +
-                           "o Cleaning up to avoid attracting wildlife\n\n" +
+                           "• Cooking food thoroughly\n" +
+                           "• Food safety in the backcountry\n" +
+                           "• Cleaning up to avoid attracting wildlife\n\n" +
                            "Press E at the campfire to start cooking!";
         
         HighlightObject(campfireObject);
@@ -334,9 +313,7 @@ public class TutorialManager : MonoBehaviour
     {
         tutorialTitle.text = "Step 11: Head Back To Your Tent";
         tutorialText.text = "It's time for some rest after a hard day's work!\n\n" +
-                           "Head back to the highlighted tent and press E to call it a day!\n";
-        
-        // HighlightObject(tentObject);
+                           "Head back to the tent and press E to call it a day!\n";
     }
 
     private void CheckStepCompletion()
@@ -347,11 +324,9 @@ public class TutorialManager : MonoBehaviour
         switch (currentTutorialStep)
         {
             case TutorialStep.Welcome:
-                // Auto-advances
                 break;
                 
             case TutorialStep.GoToTent:
-                // Check if player is near tent
                 if (IsPlayerNear(tentObject, 4f))
                 {
                     stepComplete = true;
@@ -359,9 +334,6 @@ public class TutorialManager : MonoBehaviour
                 break;
                 
             case TutorialStep.SetupTent:
-                // Check if tent setup is complete
-                // You'll need to add a public method in TentSetupManager
-                // For now, we'll check manually or listen for events
                 if (interactableManager.GetTentSetup())
                 {
                     stepComplete = true;
@@ -404,7 +376,6 @@ public class TutorialManager : MonoBehaviour
                 break;
                 
             case TutorialStep.BuildFire:
-                // Check if fire is lit
                 if (interactableManager.GetCampfireLit())
                 {
                     stepComplete = true;
@@ -423,7 +394,6 @@ public class TutorialManager : MonoBehaviour
                 {
                     stepComplete = true;
                 }
-                // Check if meal is cooked
                 break;
             case TutorialStep.Complete:
                 ShowCompleted();
@@ -451,7 +421,6 @@ public class TutorialManager : MonoBehaviour
 
     private void ClearAllHighlights()
     {
-        // Clear all object highlights
         ObjectHighlighter[] highlighters = FindObjectsOfType<ObjectHighlighter>();
         foreach (ObjectHighlighter h in highlighters)
         {
@@ -467,43 +436,11 @@ public class TutorialManager : MonoBehaviour
         return dist <= distance;
     }
 
-    // private IEnumerator MovePlayerTo(Vector3 targetPosition)
-    // {
-    //     if (player == null) yield break;
-        
-    //     // Disable player input temporarily
-    //     if (playerController != null)
-    //     {
-    //         playerController.enabled = false;
-    //     }
-        
-    //     // Move towards target
-    //     while (Vector3.Distance(player.transform.position, targetPosition) > 1f)
-    //     {
-    //         Vector3 direction = (targetPosition - player.transform.position).normalized;
-    //         player.transform.position += direction * moveSpeed * Time.deltaTime;
-            
-    //         yield return null;
-    //     }
-        
-    //     // Re-enable player input
-    //     if (playerController != null)
-    //     {
-    //         playerController.enabled = true;
-    //     }
-    // }
-
     private IEnumerator AutoAdvanceAfterDelay(float seconds)
     {
         yield return new WaitForSecondsRealtime(seconds);
         NextStep();
     }
-
-    // private IEnumerator CloseTutorialAfterDelay(float seconds)
-    // {
-    //     yield return new WaitForSecondsRealtime(seconds);
-    //     CloseTutorial();
-    // }
 
     public void NextStep()
     {
@@ -544,72 +481,24 @@ public class TutorialManager : MonoBehaviour
         
         ClearAllHighlights();
         
-        // Auto-close tutorial panel after delay
-        // Invoke("CloseTutorial", 5f);
-
-        // StartCoroutine(CloseTutorialAfterDelay(5f));
-
         StartCoroutine(ShowCreditsAfterDelay(5f));
     }
 
     private IEnumerator ShowCreditsAfterDelay(float delay)
-{
-    yield return new WaitForSecondsRealtime(delay);
-    
-    // Close tutorial panel
-    if (tutorialPanel != null)
-        tutorialPanel.SetActive(false);
-    
-    // Load credits scene
-    if (GameSceneManager.Instance != null)
     {
-        Debug.Log("Tutorial complete - loading credits");
-        GameSceneManager.Instance.LoadCredits();
-    }
-    else
-    {
-        // Fallback
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Credits");
-    }
-}
-
-    // public void SkipTutorial()
-    // {
-    //     tutorialActive = false;
-    //     tutorialComplete = true;
-    //     ClearAllHighlights();
+        yield return new WaitForSecondsRealtime(delay);
         
-    //     if (tutorialPanel != null)
-    //         tutorialPanel.SetActive(false);
-    // }
-
-    private void CloseTutorial()
-    {
         if (tutorialPanel != null)
             tutorialPanel.SetActive(false);
+        
+        if (GameSceneManager.Instance != null)
+        {
+            Debug.Log("Tutorial complete - loading credits");
+            GameSceneManager.Instance.LoadCredits();
+        }
+        else
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Credits");
+        }
     }
-
-    // public void OnTentSetupComplete()
-    // {
-    //     if (tutorialSteps[currentStep] == TutorialStep.SetupTent)
-    //     {
-    //         NextStep();
-    //     }
-    // }
-
-    // public void OnFireBuilt()
-    // {
-    //     if (tutorialSteps[currentStep] == TutorialStep.BuildFire)
-    //     {
-    //         NextStep();
-    //     }
-    // }
-
-    // public void OnMealCooked()
-    // {
-    //     if (tutorialSteps[currentStep] == TutorialStep.CookMeal)
-    //     {
-    //         NextStep();
-    //     }
-    // }
 }

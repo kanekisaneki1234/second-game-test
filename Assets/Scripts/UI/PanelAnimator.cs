@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PanelAnimator : MonoBehaviour
@@ -7,6 +5,7 @@ public class PanelAnimator : MonoBehaviour
     private CanvasGroup canvasGroup;
     private Vector3 targetScale = Vector3.one;
     private float animSpeed = 5f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -15,7 +14,6 @@ public class PanelAnimator : MonoBehaviour
 
     void OnEnable()
     {
-        // Start small and transparent
         transform.localScale = Vector3.zero;
         if (canvasGroup != null)
             canvasGroup.alpha = 0f;

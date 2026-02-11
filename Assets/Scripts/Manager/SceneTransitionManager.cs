@@ -13,7 +13,7 @@ public class SceneTransitionManager : MonoBehaviour
     [SerializeField] private Image fadeImage;
     
     [Header("Fade Settings")]
-    [SerializeField] private float fadeDuration = 1f;
+    [SerializeField] private float fadeDuration = 3f;
     [SerializeField] private Color fadeColor = Color.black;
     
     [Header("Auto Fade In On Start")]
@@ -21,14 +21,11 @@ public class SceneTransitionManager : MonoBehaviour
     
     private bool isTransitioning = false;
 
-    private static int instanceCount = 0;
+    // private static int instanceCount = 0;
     // Start is called before the first frame update
 
     void Awake()
     {
-        instanceCount++;
-        Debug.Log($"Instance count: {instanceCount}");
-        // Singleton with DontDestroyOnLoad
         if (Instance == null)
         {
             Instance = this;
@@ -39,12 +36,6 @@ public class SceneTransitionManager : MonoBehaviour
                 DontDestroyOnLoad(transitionCanvas.gameObject);
             }
         }
-        // else
-        // {
-        //     Debug.Log("Destroyed Duplicate Instance");
-        //     Destroy(gameObject);
-        //     return;
-        // }
         
         if (fadeImage != null)
         {
@@ -54,8 +45,7 @@ public class SceneTransitionManager : MonoBehaviour
     void Start()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
-        
-        // Fade in on first load
+
         if (fadeInOnSceneLoad)
         {
             StartCoroutine(FadeIn());
@@ -63,10 +53,7 @@ public class SceneTransitionManager : MonoBehaviour
 
         if (Instance != this)
         {
-            // This is a duplicate - destroy after a delay to allow fade to complete
-            Destroy(gameObject, 2f); 
-            instanceCount--;
-            Debug.Log(instanceCount);
+            Destroy(gameObject, 2f);
         }
     }
 
@@ -91,47 +78,18 @@ public class SceneTransitionManager : MonoBehaviour
         }
     }
 
-    // public void LoadSceneWithFade(int sceneIndex)
-    // {
-    //     if (!isTransitioning)
-    //     {
-    //         StartCoroutine(TransitionToScene(sceneIndex));
-    //     }
-    // }
-
     private IEnumerator TransitionToScene(string sceneName)
     {
         isTransitioning = true;
         
         Debug.Log($"Fading out and loading: {sceneName}");
-        
-        // Fade out
+
         yield return StartCoroutine(FadeOut());
-        
-        // Load scene
+
         SceneManager.LoadScene(sceneName);
-        
-        // Fade in happens automatically via OnSceneLoaded
         
         isTransitioning = false;
     }
-
-    // private IEnumerator TransitionToScene(int sceneIndex)
-    // {
-    //     isTransitioning = true;
-        
-    //     Debug.Log($"Fading out and loading scene index: {sceneIndex}");
-        
-    //     // Fade out
-    //     yield return StartCoroutine(FadeOut());
-        
-    //     // Load scene
-    //     SceneManager.LoadScene(sceneIndex);
-        
-    //     // Fade in happens automatically via OnSceneLoaded
-        
-    //     isTransitioning = false;
-    // }
 
     public IEnumerator FadeOut()
     {
@@ -142,12 +100,11 @@ public class SceneTransitionManager : MonoBehaviour
         }
         
         Debug.Log("Fading out...");
-        
-        // Ensure canvas is active and on top
+
         if (transitionCanvas != null)
         {
             transitionCanvas.gameObject.SetActive(true);
-            transitionCanvas.sortingOrder = 9999; // Render on top of everything
+            transitionCanvas.sortingOrder = 9999;
         }
         
         float elapsed = 0f;
@@ -160,7 +117,7 @@ public class SceneTransitionManager : MonoBehaviour
         
         while (elapsed < fadeDuration)
         {
-            elapsed += Time.unscaledDeltaTime; // Use unscaled time (works even if game is paused)
+            elapsed += Time.unscaledDeltaTime;
             float alpha = Mathf.Lerp(0f, 1f, elapsed / fadeDuration);
             
             Color newColor = fadeColor;
@@ -169,8 +126,7 @@ public class SceneTransitionManager : MonoBehaviour
             
             yield return null;
         }
-        
-        // Ensure fully opaque
+
         endColor.a = 1f;
         fadeImage.color = endColor;
         
@@ -186,8 +142,7 @@ public class SceneTransitionManager : MonoBehaviour
         }
         
         Debug.Log("Fading in...");
-        
-        // Ensure canvas is active
+
         if (transitionCanvas != null)
         {
             transitionCanvas.gameObject.SetActive(true);
@@ -213,16 +168,11 @@ public class SceneTransitionManager : MonoBehaviour
             
             yield return null;
         }
-        
-        // Ensure fully transparent
+
         endColor.a = 0f;
         fadeImage.color = endColor;
         
         Debug.Log("Fade in complete");
-        
-        // Optionally deactivate canvas when not fading
-        // if (transitionCanvas != null)
-        //     transitionCanvas.gameObject.SetActive(false);
     }
 
     public void SetFadeBlack()

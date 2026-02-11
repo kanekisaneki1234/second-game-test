@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -229,7 +228,7 @@ public class TentSetupManager : MonoBehaviour
             RectTransform rectTransform = stakeButtons[i].GetComponent<RectTransform>();
             if (rectTransform != null)
             {
-                rectTransform.sizeDelta = new Vector2(200f, rectTransform.sizeDelta.y); // Width = 200, keep height
+                rectTransform.sizeDelta = new Vector2(200f, rectTransform.sizeDelta.y);
             }
             
             TextMeshProUGUI btnText = stakeButtons[i].GetComponentInChildren<TextMeshProUGUI>();
@@ -326,7 +325,6 @@ public class TentSetupManager : MonoBehaviour
         tutorialPanel.SetActive(true);
         Time.timeScale = 1f;
 
-        // Interactable tentInteractable = FindObjectOfType<Interactable>();
         if (tentInteractable != null)
         {
             tentInteractable.SetTentSetup(true);

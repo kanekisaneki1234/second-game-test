@@ -18,20 +18,14 @@ public class GameSceneManager : MonoBehaviour
 
     [Header("Audio")]
     [SerializeField] private AudioSource musicSource;
-    // [SerializeField] private AudioClip mainMenuMusic;
-    // [SerializeField] private AudioClip gameplayMusic;
-    // [SerializeField] private AudioClip creditsMusic;
-    // [SerializeField] private float musicVolume = 0.5f;
-    // private static int gminstanceCount = 0;
 
     void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
-            // gminstanceCount++;
+
             DontDestroyOnLoad(gameObject);
-            // Debug.Log(gminstanceCount);
         }
         else
         {
@@ -42,9 +36,6 @@ public class GameSceneManager : MonoBehaviour
     void Start()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
-
-        // if (musicSource != null)
-        //     musicSource.volume = musicVolume;
     }
 
     void OnDestroy()
@@ -55,8 +46,7 @@ public class GameSceneManager : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         Debug.Log($"Scene loaded: {scene.name}");
-        
-        // Play appropriate music
+
         switch (scene.name)
         {
             case "MainMenu":
@@ -77,7 +67,6 @@ public class GameSceneManager : MonoBehaviour
     {
         if (musicSource == null || clip == null) return;
         
-        // Don't restart if already playing this clip
         if (musicSource.clip == clip && musicSource.isPlaying)
             return;
         
@@ -113,14 +102,6 @@ public class GameSceneManager : MonoBehaviour
 
     private void LoadScene(string sceneName)
     {
-        // if (transitionDelay > 0)
-        // {
-        //     StartCoroutine(LoadSceneWithDelay(sceneName, transitionDelay));
-        // }
-        // else
-        // {
-        //     SceneManager.LoadScene(sceneName);
-        // }
         if (SceneTransitionManager.Instance != null)
         {
             SceneTransitionManager.Instance.LoadSceneWithFade(sceneName);
@@ -146,10 +127,4 @@ public class GameSceneManager : MonoBehaviour
         yield return new WaitForSeconds(delay);
         SceneManager.LoadScene(sceneName);
     }
-
-    // public void ReloadCurrentScene()
-    // {
-    //     Debug.Log("Reloading current scene...");
-    //     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    // }
 }

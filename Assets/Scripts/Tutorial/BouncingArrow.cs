@@ -5,7 +5,7 @@ using UnityEngine;
 public class BouncingArrow : MonoBehaviour
 {
     [SerializeField] private float bounceHeight = 0.5f;
-    [SerializeField] private float bounceSpeed = 2f;
+    [SerializeField] private float bounceSpeed = 4f;
 
     private Vector3 startPosition;
 

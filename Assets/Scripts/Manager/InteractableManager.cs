@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class InteractableManager : MonoBehaviour
@@ -17,7 +13,6 @@ public class InteractableManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            // DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -72,9 +67,6 @@ public class InteractableManager : MonoBehaviour
 
     public void EnableCampfireResources()
     {
-        // EnableResourcesByTag("Tinder");
-        // EnableResourcesByTag("Kindling");
-        // EnableResourcesByTag("Log");
         EnableResourcesByTag("CampfireResource");
         Debug.Log("Campfire resources enabled!");
     }
@@ -102,7 +94,6 @@ public class InteractableManager : MonoBehaviour
         if (collider != null)
         {
             collider.isTrigger = true;
-            // collider.enabled = true;
             Debug.Log($"Enabled collider for {resource.name}");
         }
         else
@@ -110,22 +101,6 @@ public class InteractableManager : MonoBehaviour
             Debug.LogWarning($"No Collider2D found on {resource.name}");
         }
     }
-
-    // private void DisableResourcesByTag(string tag)
-    // {
-    //     GameObject[] resources = GameObject.FindGameObjectsWithTag(tag);
-        
-    //     foreach (GameObject resource in resources)
-    //     {
-    //         Collider2D collider = resource.GetComponent<Collider2D>();
-            
-    //         if (collider != null)
-    //         {
-    //             collider.enabled = false;
-    //             Debug.Log($"Disabled collider for {resource.name} - inventory full!");
-    //         }
-    //     }
-    // }
 
     // Update is called once per frame
     void Update()

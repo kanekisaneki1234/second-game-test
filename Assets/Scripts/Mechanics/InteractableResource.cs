@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class InteractableResource : MonoBehaviour
@@ -13,11 +11,10 @@ public class InteractableResource : MonoBehaviour
 
     [Header("Resource Settings")]
     [SerializeField] private ResourceType resourceType;
-    [SerializeField] private int resourceAmount = 1; // How many you get per collection
+    [SerializeField] private int resourceAmount = 1; 
     
     [Header("Visual Settings")]
     [SerializeField] private GameObject visualObject;
-    // [SerializeField] private string interactionPrompt = "Press E to collect";
     
     [Header("Audio (Optional)")]
     [SerializeField] private AudioClip collectSound;
@@ -25,6 +22,7 @@ public class InteractableResource : MonoBehaviour
     private bool playerInRange = false;
     private bool alreadyCollected = false;
     private FireResourceManager resourceManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,7 +33,6 @@ public class InteractableResource : MonoBehaviour
             Debug.LogError("FireResourceManager not found in scene!");
         }
         
-        // If no visual object specified, use this GameObject's sprite
         if (visualObject == null)
         {
             visualObject = gameObject;
@@ -55,52 +52,34 @@ public class InteractableResource : MonoBehaviour
     {
         if (resourceManager == null || alreadyCollected) return;
         
-        // Add resource to inventory
         resourceManager.AddResource(resourceType, resourceAmount);
         
-        // Mark as collected
         alreadyCollected = true;
         
-        // Play sound if available
         if (collectSound != null)
         {
             AudioSource.PlayClipAtPoint(collectSound, transform.position);
         }
         
-        // Visual feedback
         Debug.Log($"Collected {resourceAmount}x {resourceType.ToString()}");
         
-        // Show collection message on screen (optional)
         ShowCollectionFeedback();
         
-        // Disable/hide the visual object
         if (visualObject != null)
         {
             visualObject.SetActive(false);
         }
 
-        // InteractionPromptManager.Instance?.HidePrompt();
         if (InteractionPromptManager.Instance == null)
         {
             InteractionPromptManager.Instance.HidePrompt();
         }
-        // if (myObject != null)
-        // {
-        //     myObject.DoSomething();
-        // }
-        
-        // Optionally destroy after a delay (in case we want to respawn later)
-        // Destroy(gameObject, 0.5f);
     }
 
     private void ShowCollectionFeedback()
     {
-        // Create floating text showing what was collected
-        // This is optional - you can implement this later
         string message = $"+{resourceAmount} {resourceType}";
         Debug.Log(message);
-        
-        // TODO: Create floating text UI element (optional polish)
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -109,9 +88,7 @@ public class InteractableResource : MonoBehaviour
         {
             playerInRange = true;
             
-            // Show prompt
             string resourceName = GetResourceDisplayName();
-            // Debug.Log($"{interactionPrompt} {resourceName}");
             InteractionPromptManager.Instance?.ShowPrompt($"Press E to collect {resourceName}");
         }
     }

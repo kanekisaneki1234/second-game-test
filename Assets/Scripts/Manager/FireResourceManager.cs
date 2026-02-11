@@ -1,13 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
 public class FireResourceManager : MonoBehaviour
 {
-    [Header("Interactable Manager Reference")]
-    [SerializeField] private InteractableManager interactableManager;
-
     [Header("UI References")]
     [SerializeField] private GameObject inventoryPanel;
     [SerializeField] private TextMeshProUGUI tinderText;
@@ -62,8 +57,7 @@ public class FireResourceManager : MonoBehaviour
         }
         
         UpdateInventoryUI();
-        
-        // Show inventory when first item collected
+
         if (!inventoryRevealed)
         {
             ShowInventory();
@@ -95,7 +89,6 @@ public class FireResourceManager : MonoBehaviour
         if (tinderText != null)
         {
             tinderText.text = $"Tinder: {tinderCount}/{tinderNeeded}";
-            // Change color if requirement met
             tinderText.color = tinderCount >= tinderNeeded ? Color.green : Color.white;
         }
         
