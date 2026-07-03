@@ -99,3 +99,12 @@ InitTestScene*.unity*
 /[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
 
 .DS_Store
+
+# Script-only repository — ignore all Unity assets except Scripts
+Assets/*
+!Assets/Scripts/
+
+# Project config and IDE files not needed in a script-only repo
+ProjectSettings/
+Packages/
+.vscode/
